@@ -1,0 +1,87 @@
+---
+title: "SMDS Homework - Block 2"
+author: "P. Morichetti, L. Arrighi and E. Ballarin | Group 'I'"
+date: "22nd April 2020"
+output:
+  html_document:
+    toc: yes
+  beamer_presentation:
+    highlight: tango
+  include: null
+  ioslides_presentation:
+    highlight: tango
+  pdf_document:
+    highlight: tango
+    keep_tex: yes
+    toc: yes
+  slide_level: 2
+  slidy_presentation:
+    fig.height: 3
+    fig.width: 4
+    highlight: tango
+header-includes:
+- \usepackage{color}
+- \usepackage{graphicx}
+- \usepackage{grffile}
+- \definecolor{Purple}{HTML}{911146}
+- \definecolor{Orange}{HTML}{CF4A30}
+- \setbeamercolor{alerted text}{fg=Orange}
+- \setbeamercolor{frametitle}{bg=Purple}
+institute: University of Trieste, SISSA, ICTP, University of Udine
+graphics: yes
+fontsize: 10pt
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.align = 'center', warning=FALSE, message=FALSE, fig.asp=0.625, dev='png', global.par = TRUE, dev.args=list(pointsize=10), fig.path = 'figs/')
+library(MASS)
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+local({
+  hook_plot = knit_hooks$get('plot')
+  knit_hooks$set(plot = function(x, options) {
+    paste0('\n\n----\n\n', hook_plot(x, options))
+  })
+})
+```
+
+
+# ***LAB*** EXERCISES
+
+**Exercise 1**
+
+- Text.
+
+- Text.
+
+***Solution***
+```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+```
+
+
+# ***DAAG*** EXERCISES
+
+**Exercise 1**
+
+- Text.
+
+- Text.
+
+***Solution***
+```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+```
+
+
+# ***CS*** EXERCISES
+
+**Exercise 1**
+
+- Text.
+
+- Text.
+
+***Solution***
+```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+```
