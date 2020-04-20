@@ -57,8 +57,8 @@ local({
 - Text.
 
 ***Solution***
-```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-```
+#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+#```
 
 
 # ***DAAG*** EXERCISES
@@ -70,8 +70,8 @@ local({
 - Text.
 
 ***Solution***
-```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-```
+#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+#```
 
 
 # ***CS*** EXERCISES
@@ -83,5 +83,5 @@ local({
 - Text.
 
 ***Solution***
-```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-```
+#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+#```
