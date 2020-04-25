@@ -1,59 +1,60 @@
+# FUNCTIONS
+
+chisq_term <- function(o, e)
+    {
+        return ((o-e)*(o-e)/e)
+    }
+
+################################################################################
+
+# EXERCISE
+
 set.seed(101)
-  
-# observations and cells 
+
+# Observation nr., friends, zones, probabilities
+
 n <- 50
 K <- 4
 
-##### here is the pro alone ####
-# generate the values
-y <- sample( 1:K, n, replace=TRUE, prob =c( 1/16, 3/16, 5/16, 7/16) )
-observed <- table(y)
-expected <- c( n*(1/16), n*(3/16), n*(5/16), n*(7/16) )
-x2 <- sum( (observed-expected)^(2)/expected)
-# manually compute the p-value
-pchisq(x2, df =K-1, lower.tail =FALSE )
-# same result with the chisq.test function
-chisq.test( observed, p = c( 1/16, 3/16, 5/16, 7/16) )
+bad_friends <- 6
+good_friends <- 1
+friends <- good_friends + bad_friends
+
+bad_prob <-  c(7/16, 5/16, 3/16, 1/16)
+good_prob <- c(1/16, 3/16, 5/16, 7/16)
 
 
-##### joined with others ####
-# we're in 7 now
-m <- 7
-friends <- array(0, c(m, n))
-# 6 are bad 
-for (j in (1:(m-1)))
-{
-  friends[j, ] <- sample(1:K, n, replace=TRUE, prob=c(7/16, 5/16, 3/16, 1/16))
-}
-# here the pro
-friends[m, ] <- sample(1:K, n, replace=TRUE, prob=c(1/16, 3/16, 5/16, 7/16))
+# Simulation (bad friends only)
+throws_bad <- replicate(bad_friends, sample(1:K, n, replace=TRUE, prob=bad_prob))
 
-# observed values
-observed <- array(0, c(m, K))
-for (j in (1:m))
-{
-  observed[j, ] <- table(friends[j, ]) 
-}
+# Simulation (good friends only)
+throws_good <- replicate(good_friends, sample(1:K, n, replace=TRUE, prob=good_prob))
 
-# expected values
-expected <- array(0, c(m, K))
-for (j in (1:m-1))
-{
-  expected[j, ] <- c( n*(7/16), n*(5/16), n*(3/16), n*(1/16) )
-}
-expected[m, ] <- c( n*(1/16), n*(3/16), n*(5/16), n*(7/16) )
 
-# let's compute the Pearson's test storing the difference between observed and expected values in a matrix
-difference <- array(0, c(m, K))
-for (j in (1:m))
-{
-  for (i in (1:K))
-  {
-    difference[j, i] = ((observed[j, i] - expected[j, i])^2/expected[j, i])
-  }
-}
+pivot = 0.0
 
-# manually compute the p-value
-x2 <- sum(difference)
-pchisq(x2, df = K-1, lower.tail =FALSE )
+# COMPUTE SUMS - BAD FRIENDS
 
+for (friend in (1:bad_friends))
+    {
+        pivot <- pivot + sum(chisq_term(table(throws_bad[,friend]), n*bad_prob))
+    }
+
+# TEST - BAD-ONLY FRIENDS
+
+pchisq(pivot, df=(K-1)*(bad_friends-1), lower.tail=FALSE)
+
+
+################################################################################
+
+
+# COMPUTE SUMS - GOOD FRIENDS
+
+for (friend in (1:good_friends))
+    {
+        pivot <- pivot + sum(chisq_term(table(throws_good[,friend]), n*bad_prob))
+    }
+
+# TEST - GOOD+BAD FRIENDS
+
+pchisq(pivot, df=(K-1)*(friends-1), lower.tail=FALSE)

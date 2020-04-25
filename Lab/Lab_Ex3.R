@@ -14,19 +14,22 @@ text( Instagram[-6], Twitter[-6]+5, Owners[-6], cex=0.8 )
 text( Instagram[6], Twitter[6]-5, Owners[6], cex=0.8 )
 
 # Create a more suitable dataframe
-all <- data.frame(Owner = Owners, Instagram = Instagram, Twitter = Twitter)
+all <- data.frame(Owners = Owners, Instagram = Instagram, Twitter = Twitter)
 
 # Plot correlation using ggpubr library
-ggscatter(all, x = 'Instagram', y = 'Twitter', 
+ggscatter(all, x = 'Instagram', y = 'Twitter',
           color = 'red',   # for the points
-          add = "reg.line", 
+          add = "reg.line",
           add.params = list(color = "blue", fill = "lightgray"),  # for the line
-          conf.int = TRUE, 
+          conf.int = TRUE,
           cor.coef = TRUE, cor.method = "pearson",
           xlab = "Instagram", ylab = "Twitter",
           xlim=c(60, 150), ylim=c(40, 120))
 
 # Pearson test
-pearson <- cor.test(Instagram, Twitter, 
+pearson <- cor.test(Instagram, Twitter,
                 method = "pearson")
 
+# Print the seeked p-value
+
+pearson$p.value
