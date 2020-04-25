@@ -25,21 +25,41 @@ $$
 
 ```{r message=TRUE, warning=TRUE}
 aberrant_crypt <- c(87, 53, 72, 90, 78, 85, 83)
+n <- length(aberrant_crypt)
+M <- 10000
+crypt_mean <-mean(aberrant_crypt)
+crypt_var <- var(aberrant_crypt)
 
-paste("aberrant crypt mean:", mean(aberrant_crypt))
-paste("aberrant crypt variance:", var(aberrant_crypt))
+paste("aberrant crypt mean:", crypt_mean)
+paste("aberrant crypt variance:", crypt_var)
 
 vec_mean <- c()
 vec_var <- c()
-
-for (i in 0:100){
-  x <- rpois(7, 78.28)
+wilcox <- numeric(M)
+for (i in 0:M-1){
+  x <- rpois(n, 78.28)
+  wilcox[i] <- wilcox.test(aberrant_crypt, x, exact = FALSE)$p.value
+  
   vec_mean <- c(vec_mean, mean(x))
   vec_var <- c(vec_var, var(x))
 }
 
-paste("poisson mean simulation:", mean(vec_mean))
-paste("poisson variance simulation:", mean(vec_var))
+t1 <- (vec_mean - mean(vec_mean))/(var(vec_mean)/length(vec_mean))
+q1_5 <- quantile(t1, 0.05)
+q1_95 <- quantile(t1, 0.95)
+
+paste("quantile analysis for the mean:", q1_5, q1_95)
+if(crypt_mean > q1_5 && crypt_mean < q1_95){paste("yes")}else{paste("no")}
+
+t2 <- (vec_var - mean(vec_var))/(var(vec_var)/length(vec_var))
+q2_5 <- quantile(t2, 0.05)
+q2_95 <- quantile(t2, 0.95)
+
+paste("quantile analysis for the variance:", q2_5, q2_95)
+if(crypt_mean > q2_5 && crypt_mean < q2_95){paste("yes")}else{paste("no")}
+
+wilcox_result <- sum(ifelse(wilcox > 0.05, TRUE, FALSE))/M
+paste("WILCOX TEST - number of success evidence:", wilcox_result, "%")
 ```
 
 
@@ -105,18 +125,33 @@ Repeat this several times. There should be no consistent pattern in the acf plot
 *__Solution__*
 
 ```{r}
-par(mfrow=c(3, 2))
+set.seed(1)
+
+y1_acf <- list()
+y_acf <- list()
+
+par(mfrow=c(2, 1))
 for(i in 1:3){
   y1 <- rnorm(51)
   y <- y1[-1] + y1[-51]
-  acf(y1)  # acf is ‘autocorrelation function’
-  # (see Chapter 9)
-  acf(y)
+  
+  y1_acf[[i]] <- acf(y1, na.action=na.pass, plot=FALSE)
+  y_acf[[i]] <- acf(y, na.action=na.pass, plot=FALSE)
 }
+
+plot(y1_acf[[1]], type="p", pch = 15, max.mfrow=1, ylim=c(-.5,1.1))
+points(y1_acf[[2]]$lag, y1_acf[[2]]$acf, pch = 16, cex = 1.1, col="orange")
+points(y1_acf[[3]]$lag, y1_acf[[3]]$acf, pch = 17, cex = 1.2, col="red")
+
+plot(y_acf[[1]], type="p", pch = 15, max.mfrow=1, ylim=c(-.5,1))
+points(y_acf[[2]]$lag, y_acf[[2]]$acf, pch = 16, cex = 1.1, col="orange")
+points(y_acf[[3]]$lag, y_acf[[3]]$acf, pch = 17, cex = 1.2, col="red")
 ```
 
+In the top plot (series y1) there isn't a clear path on the same lag, neither on each lags. In the other hand, in the bottom plot, it seems to be a fairly consistent path among the three series: there are few lags in which the series have, more or less, the same correlation. 
+Moreover, it is clear that exist a kind of sinusoidal function among lags for the same collection (and it is showen for each collection) with 6/7 lags of period; in the end the three series seems to be out-of-phases among them.
 
-__Exercise 13 - Cap 4__
+__Exercise 7 - Cap 4__
 
 Create a function that does the calculations in the first two lines of the previous exercise. Put the calculation in a loop that repeats 25 times. Calculate the mean and variance for each vector y that is returned. Store the 25 means in the vector av, and store the 25 variances in the vector v. Calculate the variance of av.
 
@@ -138,6 +173,7 @@ for(i in 1:25){
   v <- c(v, var(computation[[i]]))
 }
 
-var_v <- var(v)
+var_v <- var(av)
+paste("variance:", var_v)
 ```
 
