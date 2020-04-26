@@ -16,6 +16,8 @@ mc_simulation <- function( P, n, initial )
     p <- P[states[t-1], ]
     
     # next state is drawn from multinomial
+    # rmultinorm generates multinomially distributed random number vectors and compute multinomial probabilities,
+    # so, rmultinorm returns a vector which drawn state is assigned to 1
     states[t] <- which(rmultinom(1, 1, p) == 1)
   }
   return(states)
@@ -29,11 +31,13 @@ n_iter <- 1000
 
 # simulate chain
 MC <- numeric(n_iter)
-MC <- mc_simulation( P, n_iter, 3 )
+MC <- mc_simulation( P, n_iter, 1 )
 
-#matplot(MC, type = "p", col = "red", ylim = c(0,4), 
+# matplot(MC, type = "p", col = "red", ylim = c(0,4), 
 #        ylab = 'state', xlab='time')
 
 result <- t(matrix(c("Sun", "Cloud", "Rain",
                      table(MC)/n_iter), nrow = 3, ncol = 2))
 result
+
+
