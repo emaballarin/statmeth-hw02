@@ -15,10 +15,10 @@ $$ \begin{matrix}
                         
 Enter these data and compute their sample mean and variance. Is the Poisson model appropriate for these data? To investigate how the sample variance and sample mean differ under the Poisson assumption, repeat the following simulation experiment several times:
 
-$$
+```
 x <- rpois(7, 78.3) \\
 mean(x); var(x)
-$$
+```
 
 
 *__Solution__*
