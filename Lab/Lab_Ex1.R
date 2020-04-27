@@ -41,3 +41,6 @@ curve(((n-1)/sigma^2) * dchisq(x * ((n-1)/sigma^2), df = n - 1),
 # Make the "bias" more apparent
 segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
+
+# Legend
+legend(x, y=NULL, legend, fill, col, bg)
