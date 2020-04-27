@@ -3,10 +3,8 @@
 # Biased sample-variance, done in an efficient manner
 var_b <- function(x)
 {
-    var(x)*(length(x)-1)/length(x)
+  var(x)*(length(x)-1)/length(x)
 }
-
-
 
 # EXERCISE #
 
@@ -30,7 +28,7 @@ samples_stat <- apply(samples, 1, var_b)
 par(mfrow=c(1,1), oma=c(0,0,0,0))
 
 hist(samples_stat, breaks= 40, probability = TRUE,    # Biased sample-variance (hist)
-    xlab=expression(sb^2), main= bquote(sb^2), cex.main=1.5, ylim = c(0, 1.5))
+     xlab=expression(sb^2), main= bquote(sb^2), cex.main=1.5, ylim = c(0, 1.5))
 
 # Biased sample-variance (line)
 curve(((n)/sigma^2) * dchisq(x * ((n)/sigma^2), df = n - 1),
@@ -44,3 +42,5 @@ curve(((n-1)/sigma^2) * dchisq(x * ((n-1)/sigma^2), df = n - 1),
 segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
 
+# Legend
+legend(x, y=NULL, legend, fill, col, bg)

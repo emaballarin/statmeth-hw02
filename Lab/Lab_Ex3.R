@@ -28,7 +28,7 @@ ggscatter(all, x = 'Instagram', y = 'Twitter',
 
 # Pearson test
 pearson <- cor.test(Instagram, Twitter,
-                method = "pearson")
+                    method = "pearson")
 
 # Print the seeked p-value
 

@@ -25,14 +25,6 @@ llikvalues <- matrix(-llikvalues, nrow=length(gamma), ncol=length(beta), byrow=F
 conf.levels <- c(0,0.5,0.75,0.9,0.95,0.99)
 
 
-contour(gamma, beta, llikvalues-max(llikvalues),
-        levels=-qchisq(conf.levels, 2)/2,
-        xlab=expression(gamma),
-        labels=as.character(conf.levels),
-        ylab=expression(beta))
-title('Weibull relative log likelihood')
-
-
 # estimate gamma and beta
 gammahat<-uniroot(function(x) n/x+sum(log(y))-n*
                       sum(y^x*log(y))/sum(y^x),
