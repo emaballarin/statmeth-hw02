@@ -44,4 +44,4 @@ segments(1, 0, 1, 1.2,
 
 # Legend
 legend(2, 1.5, legend=c("Biased sample-variance", "Un-Biased sample-variance"),
-       col=c("red", "blue"), lty=1:2, cex=0.9)
+       col=c("red", "blue"), lty=1:1, cex=0.9)
