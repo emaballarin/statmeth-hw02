@@ -52,13 +52,11 @@ local({
 
 **Exercise 1**
 
-- Text.
-
-- Text.
+Check the biased nature of $s_2 b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s_2$ and comment the difference.
 
 ***Solution***
-#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-#```
+```{r Lab_Ex1, code = readLines("Lab/Lab_Ex1.R"), echo=TRUE}
+```
 
 
 # ***DAAG*** EXERCISES

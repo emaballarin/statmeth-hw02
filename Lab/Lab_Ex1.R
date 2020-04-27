@@ -43,4 +43,5 @@ segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
 
 # Legend
-legend(x, y=NULL, legend, fill, col, bg)
+legend(2, 1.5, legend=c("Biased sample-variance", "Un-Biased sample-variance"),
+       col=c("red", "blue"), lty=1:2, cex=0.9)
