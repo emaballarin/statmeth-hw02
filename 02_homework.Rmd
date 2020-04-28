@@ -52,36 +52,252 @@ local({
 
 **Exercise 1**
 
-- Text.
-
-- Text.
+Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
 
 ***Solution***
-#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-#```
+```{r Lab_Ex1, code = readLines("Lab/Lab_Ex1.R"), echo=TRUE}
+```
+We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+
+**Exercise 2**
+Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
+
+- Zone 1 (from 1 to 3 points): $p_1=\frac{7}{16}$;
+
+- Zone 2 (from 4 to 6 points); $p_2=\frac{5}{16}$;
+
+- Zone 3 (from 7 to 9 points); $p_3=\frac{3}{16}$;
+
+- Zone 4 (the highest points in the middle of the target, say 10, 25, 50 points): $p_4=\frac{1}{16}$;
+
+The number of players is equal to $7$ and each of them throws $50$ darts, which corresponds to the number of considered observations ($n=50$ for each player). 
+
+We assume as null hypothesis: $\textit{due to a moderate control on his darts skills, he has decreasing probabilities to hit the best zones}$,
+$$
+H_0 : \,p_1=\frac{7}{16};\,\,\,\,p_2=\frac{5}{16};\,\,\,\,p_3=\frac{3}{16};\,\,\,\,p_4=\frac{1}{16}.
+$$
+We will try to simulate the data and perform a null-hypothesis-test, assuming that one of the $7$ players is a great player.
+
+
+***Solution***
+
+
+
+
+**Exercise 3**
+
+Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer. Here is the dataframe.
+
+***Solution***
+
+
+
+
+
+**Exercise 4**
+
+Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$.
+	
+***Solution***
+	
+First of all, let's recall the definition of the $J$ matrix. Given a certain model with likelihood $l(\theta; y)$ with data $y$ and parameters set $\theta$, $J(\theta; y)$ is defined as follows:
+
+$$
+J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}
+$$
+	
+Since $J$ matrix must be derived from the log-likelihood, let's remember its expression:
+	
+$$
+l(\gamma,\beta;y)=n \log(\gamma)  -  n \gamma \log(\beta)  +  \gamma \sum_{i=1}^n(\log(y_i))  -  \sum_{i=1}^n(y_i/\beta)^\gamma
+$$
+As $J$ matrix is defined by using the second-order derivatives on model's parameters, previously first-order derivatives must be computed. In order to make the computation, it will be consiedered the next identities:
+	
+$$
+	\begin{cases}
+	\sum_{i=1}^n(y_i/\beta)^\gamma = \beta^{-\gamma}\sum_{i=1}^ny_i^\gamma \ \ \ \ \ \ \mathrm{(a)} \\
+	\sum_{i=1}^n(y_i/\beta)^\gamma = \sum_{i=1}^ne^{\gamma\log(y_i/\beta)} \ \ \mathrm{(b)}
+	\end{cases}
+$$
+	
+In the computation of $\partial_\gamma$ and $\partial_\beta$, (b) and (a) identities are used respectively.
+	
+$$
+\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}  -  n\log(\beta)  +  \sum_{i=1}^n\log(y_i/\beta)^\gamma   \\
+	\frac{\partial l(\gamma,\beta;y)}{\partial \beta} = \frac{n\gamma}{\beta}  -  \frac{\gamma}{\beta} \sum_{i=1}^ny^i/\beta
+$$
+Now it is possible to compute second-order derivatives, which constitutes the elements of the $J$ matrix. Again to compute this expressions the (a) and (b) identities are used.
+	
+1. $\partial_{\gamma\gamma}^2$ term:
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma^2}  =  -\frac{n}{\gamma^2}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log\left( \frac{y_i}{\beta} \right)^2
+$$
+	
+2. $\partial_{\gamma\beta}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma\partial\beta}  =  \frac{1}{\beta} \left[ n  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma  +  \gamma\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta} \right]
+$$
+	
+3. $\partial_{\beta\gamma}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta\partial\gamma}  =  -\frac{n}{\beta}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^{\gamma-1}  -  \frac{\gamma}{\beta}\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta}
+$$
+	
+4. $\partial_{\beta\beta}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  -\frac{n\gamma}{\beta^2}  +  \gamma(\gamma+1)\beta^{-\gamma-2} \sum_{i=1}^ny_i^\gamma
+$$
+**Exercise 5**
+
+Produce the contour plot for the quadratic approximation of the log-likelihood, based on the Taylor series:
+$$
+l(\theta)-l(\hat{\theta}) \approx -\frac{1}{2}(\theta-\hat{\theta})^T\,J(\hat{\theta})(\theta-\hat{\theta}).
+$$
+
+***Solution***
+
 
 
 # ***DAAG*** EXERCISES
 
-**Exercise 1**
+**Exercise 11 - Cap 3**
 
-- Text.
+The following data represent the total number of aberrant crypt foci (abnormal growths in the colon) observed in seven rats that had been administered a single dose of the carcinogen azoxymethane and sacrificed after six weeks (thanks to Ranjana Bird, Faculty of Human Ecology, University of Manitoba for the use of these data):
 
-- Text.
+$$ \begin{matrix}
+87 & 53 & 72 & 90 & 78 & 85 & 83
+\end{matrix} $$
+                        
+Enter these data and compute their sample mean and variance. Is the Poisson model appropriate for these data? To investigate how the sample variance and sample mean differ under the Poisson assumption, repeat the following simulation experiment several times:
+
+```
+x <- rpois(7, 78.3) \\
+mean(x); var(x)
+```
 
 ***Solution***
-#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
+```{r DAAG_ex_11_cap_3, code = readLines("src/DAAG_ex_11_cap_3.R"), echo=TRUE}
+```
+
+**Exercise 13 - Cap 3**
+
+A Markov chain for the weather in a particular season of the year has the transition matrix, from one day to the next:
+
+$$ Pb = \begin{bmatrix}
+      & sun & cloud & rain\\ 
+sun   & 0.6 & 0.2   & 0.2\\ 
+cloud & 0.2 & 0.4   & 0.4\\ 
+rain  & 0.4 & 0.3   & 0.3
+\end{bmatrix} $$
+
+It can be shown, using linear algebra, that in the long run this Markov chain will visit the states according to the stationary distribution:
+
+$$ \begin{matrix}
+sun   & cloud & rain\\ 
+0.641 & 0.208 & 0.151
+\end{matrix} $$
+
+A result called the ergodic theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
+
+a) Simulate 1000 values, and calculate the proportion of times the chain visits each of the states. Compare the proportions given by the simulation with the above theoretical proportions.
+
+b) Here is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function rollmean() from the zoo package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
+
+***Solution***
+
+__a)__
+#```{r DAAG_ex_13_cap_3, code = readLines("src/DAAG_ex_13_cap_3.R"), echo=TRUE}
 #```
 
+**Exercise 6 - Cap 4**
+
+Here we generate random normal numbers with a sequential dependence structure:
+
+```{r}
+y1 <- rnorm(51)
+y <- y1[-1] + y1[-51]
+acf(y1)  # acf is ‘autocorrelation function’
+# (see Chapter 9)
+acf(y)
+```
+
+Repeat this several times. There should be no consistent pattern in the acf plot for different random samples y1. There will be a fairly consistent pattern in the acf plot for y, a result of the correlation that is introduced by adding to each value the next value in the sequence.
+
+***Solution***
+
+```{r DAAG_ex_6_cap_4, code = readLines("src/DAAG_ex_6_cap_4.R"), echo=TRUE}
+```
+
+In the top plot (series y1) there isn't a clear path on the same lag, neither on each lags. In the other hand, in the bottom plot, it seems to be a fairly consistent path among the three series: there are few lags in which the series have, more or less, the same correlation. 
+Moreover, it is clear that exist a kind of sinusoidal function among lags for the same collection (and it is showen for each collection) with 6/7 lags of period; in the end the three series seems to be out-of-phases among them.
+
+**Exercise 11 - Cap 3**
+
+Create a function that does the calculations in the first two lines of the previous exercise. Put the calculation in a loop that repeats 25 times. Calculate the mean and variance for each vector y that is returned. Store the 25 means in the vector av, and store the 25 variances in the vector v. Calculate the variance of av.
+
+***Solution***
+
+```{r DAAG_ex_7_cap_4, code = readLines("src/DAAG_ex_7_cap_4.R"), echo=TRUE}
+```
 
 # ***CS*** EXERCISES
 
-**Exercise 1**
+**Exercise 3.3 - Cap 3**
 
-- Text.
+Rewrite the following, replacing the loop with efficient code:
 
-- Text.
+```{r}
+n <- 100000; z <- rnorm(n)
+zneg <- 0;j <- 1
+for (i in 1:n) {
+  if (z[i]<0) {
+    zneg[j] <- z[i]
+    j <- j + 1
+  }
+}
+```
+
+Confirm that your rewrite is faster but gives the same result.
 
 ***Solution***
-#```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
-#```
+
+```{r CS_ex_3_3_cap3, code = readLines("src/CS_ex_3_3_cap_3.R"), echo=TRUE}
+```
+
+**Exercise 3.5 - Cap 3**
+
+Consider solving the matrix equation $Ax = y$ for $x$ , where $y$ is a known $n$
+vector and $A$ is a known $n × n$ matrix. The formal solution to the problem is
+$x = A^{-1} \cdot y$ , but it is possible to solve the equation directly, without actually
+forming $A^{−1}$ . This question explores this direct solution. Read the help file
+for solve before trying it.
+
+a) First create an $A$ , $x$ and $y$ satisfying $Ax = y$.
+```{r}
+set.seed(0); n <- 1000
+A <- matrix(runif(n*n),n,n); x.true <- runif(n)
+y <- A%*%x.true
+```
+The idea is to experiment with solving $Ax = y$ for $x$ , but with a known
+truth to compare the answer to.
+
+b) Using solve , form the matrix $A^{-1}$ explicitly and then form $x_{1} =
+A^{-1} \cdot y$ . Note how long this takes. Also assess the mean absolute differ-
+ence between $x_1$ and $x.true$ (the approximate mean absolute ‘error’ in
+the solution).
+
+c) Now use solve to directly solve for $x$ without forming $A^{−1}$ . Note how
+long this takes and assess the mean absolute error of the result.
+
+d) What do you conclude?
+
+***Solution***
+
+```{r CS_ex_3_5_cap_3, code = readLines("src/CS_ex_3_5_cap_3.R"), echo=TRUE}
+```
+
+From the experiment results the best choice is to use $solve$ function to directly solve for $x$ without forming $A^{-1}$; indeed, both mean absolute difference and system time are much less then the other option
