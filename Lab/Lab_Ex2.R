@@ -52,27 +52,3 @@ for (friend in (1:good_friends))
 # TEST - GOOD+BAD FRIENDS
 
 pchisq(pivot, df=(K-1)*(friends-1), lower.tail=FALSE)
-
-for (friend in (1:bad_friends))
-    {
-        pivot <- pivot + sum(chisq_term(table(throws_bad[,friend]), n*bad_prob))
-    }
-
-# TEST - BAD-ONLY FRIENDS
-
-pchisq(pivot, df=(K-1)*(bad_friends-1), lower.tail=FALSE)
-
-
-################################################################################
-
-
-# COMPUTE SUMS - GOOD FRIENDS
-
-for (friend in (1:good_friends))
-    {
-        pivot <- pivot + sum(chisq_term(table(throws_good[,friend]), n*bad_prob))
-    }
-
-# TEST - GOOD+BAD FRIENDS
-
-pchisq(pivot, df=(K-1)*(friends-1), lower.tail=FALSE)
