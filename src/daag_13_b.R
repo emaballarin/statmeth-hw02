@@ -51,3 +51,6 @@ plotmarkov <-
 
 # Let apply function
 plotmarkov(100, 1, 10, P, 1)
+
+# Let apply function
+plotmarkov(1000, 1, 200, P, 1)
