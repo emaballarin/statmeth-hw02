@@ -52,13 +52,98 @@ local({
 
 **Exercise 1**
 
-Check the biased nature of $s_2 b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s_2$ and comment the difference.
+Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
 
 ***Solution***
 ```{r Lab_Ex1, code = readLines("Lab/Lab_Ex1.R"), echo=TRUE}
 ```
+We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 
 
+**Exercise 2**
+
+Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+
+***Solution***
+```{r Lab_Ex2, code = readLines("Lab/Lab_Ex2.R"), echo=TRUE}
+```
+We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+
+**Exercise 3**
+
+Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+
+***Solution***
+```{r Lab_Ex3, code = readLines("Lab/Lab_Ex3.R"), echo=TRUE}
+```
+We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+
+**Exercise 4**
+
+Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$.
+	
+***Solution***
+	
+First of all, let's recall the definition of the $J$ matrix. Given a certain model with likelihood $l(\theta; y)$ with data $y$ and parameters set $\theta$, $J(\theta; y)$ is defined as follows:
+
+$$
+J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}
+$$
+	
+Since $J$ matrix must be derived from the log-likelihood, let's remember its expression:
+	
+$$
+l(\gamma,\beta;y)=n \log(\gamma)  -  n \gamma \log(\beta)  +  \gamma \sum_{i=1}^n(\log(y_i))  -  \sum_{i=1}^n(y_i/\beta)^\gamma
+$$
+As $J$ matrix is defined by using the second-order derivatives on model's parameters, previously first-order derivatives must be computed. In order to make the computation, it will be consiedered the next identities:
+	
+$$
+	\begin{cases}
+	\sum_{i=1}^n(y_i/\beta)^\gamma = \beta^{-\gamma}\sum_{i=1}^ny_i^\gamma \ \ \ \ \ \ \mathrm{(a)} \\
+	\sum_{i=1}^n(y_i/\beta)^\gamma = \sum_{i=1}^ne^{\gamma\log(y_i/\beta)} \ \ \mathrm{(b)}
+	\end{cases}
+$$
+	
+In the computation of $\partial_\gamma$ and $\partial_\beta$, (b) and (a) identities are used respectively.
+	
+$$
+\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}  -  n\log(\beta)  +  \sum_{i=1}^n\log(y_i/\beta)^\gamma   \\
+	\frac{\partial l(\gamma,\beta;y)}{\partial \beta} = \frac{n\gamma}{\beta}  -  \frac{\gamma}{\beta} \sum_{i=1}^ny^i/\beta
+$$
+Now it is possible to compute second-order derivatives, which constitutes the elements of the $J$ matrix. Again to compute this expressions the (a) and (b) identities are used.
+	
+1. $\partial_{\gamma\gamma}^2$ term:
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma^2}  =  -\frac{n}{\gamma^2}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log\left( \frac{y_i}{\beta} \right)^2
+$$
+	
+2. $\partial_{\gamma\beta}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma\partial\beta}  =  \frac{1}{\beta} \left[ n  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma  +  \gamma\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta} \right]
+$$
+	
+3. $\partial_{\beta\gamma}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta\partial\gamma}  =  -\frac{n}{\beta}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^{\gamma-1}  -  \frac{\gamma}{\beta}\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta}
+$$
+	
+4. $\partial_{\beta\beta}^2$ term:
+	
+$$
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  -\frac{n\gamma}{\beta^2}  +  \gamma(\gamma+1)\beta^{-\gamma-2} \sum_{i=1}^ny_i^\gamma
+$$
+**Exercise 5**
+
+Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+
+***Solution***
+```{r Lab_Ex5, code = readLines("Lab/Lab_Ex5.R"), echo=TRUE}
+```
+We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 # ***DAAG*** EXERCISES
 
 **Exercise 1**
