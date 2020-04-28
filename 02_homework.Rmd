@@ -247,7 +247,6 @@ $$
 \end{bmatrix}
 $$
 A result called the $\textit{ergodic}$ theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
-**Exercise 6 - Cap 4**
 
 (a) Simulate $1000$ values, and calculate the proportion of times the chain visits each ofthe states. Compare the proportions given by the simulation with the above theoretical proportions.
 
@@ -284,6 +283,8 @@ $$
 0.429 & 0.286 & 0.286
 \end{bmatrix}
 $$
+
+**Exercise 6 - Cap 4**
 
 
 Here we generate random normal numbers with a sequential dependence structure:
