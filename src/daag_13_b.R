@@ -31,22 +31,23 @@ P <- t(matrix(c( 0.6, 0.2, 0.2,
                  0.4, 0.3, 0.3 ), nrow = 3, ncol = 3))
 
 # Number of calculated states
-n_iter <- 1000
+n_iter <- 5
 
 # Plot the result
 plotmarkov <-
   function(n=1000, start=1, window=100, transition=P, npanels=5){
     xc2 <- mc_simulation(transition, n, start)
-    mav0 <- rollmean(as.integer(xc2==0), window)
-    mav1 <- rollmean(as.integer(xc2==0), window)
-    npanel <- cut(1:length(mav0), breaks=seq(from=1, to=length(mav0),
+    mav1 <- rollmean(as.integer(xc2==1), window)
+    mav2 <- rollmean(as.integer(xc2==2), window)
+    mav3 <- rollmean(as.integer(xc2==3), window)
+    npanel <- cut(1:length(mav1), breaks=seq(from=1, to=length(mav1),
                                              length=npanels+1), include.lowest=TRUE)
-    df <- data.frame(av0=mav0, av1=mav1, x=1:length(mav0),
+    df <- data.frame(av1=mav1, av2=mav2, av3=mav3, x=1:length(mav1),
                      gp=npanel)
-    print(xyplot(av0+av1 ~ x | gp, data=df, layout=c(1,npanels),
+    print(xyplot(av1+av2+av3 ~ x | gp, data=df, layout=c(1,npanels),
                  type="l", par.strip.text=list(cex=0.65),
                  scales=list(x=list(relation="free"))))
   }
 
 # Let apply function
-plotmarkov(n_iter, 1, 2, P, 5)
+plotmarkov(100, 1, 10, P, 1)
