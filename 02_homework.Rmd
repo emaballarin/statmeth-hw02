@@ -210,7 +210,9 @@ The proportion given by the simulation depends extremely from the seed: the numb
 The proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
 
 (b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
- 
+```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
+```
+BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH
 
 # ***CS*** EXERCISES
 

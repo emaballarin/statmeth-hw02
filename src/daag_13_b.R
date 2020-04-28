@@ -25,12 +25,15 @@ mc_simulation <- function(P, n, initial)
   return(states)
 }
 
-#transition matrix
+# Transition matrix
 P <- t(matrix(c( 0.6, 0.2, 0.2,
                  0.2, 0.4, 0.4,
                  0.4, 0.3, 0.3 ), nrow = 3, ncol = 3))
 
-# plot theresult
+# Number of calculated states
+n_iter <- 1000
+
+# Plot the result
 plotmarkov <-
   function(n=1000, start=1, window=100, transition=P, npanels=5){
     xc2 <- mc_simulation(transition, n, start)
@@ -45,7 +48,5 @@ plotmarkov <-
                  scales=list(x=list(relation="free"))))
   }
 
-# number of calculated states
-n_iter <- 1000
-
-plotmarkov(n_iter, 1, 100, P, 3)
+# Let apply function
+plotmarkov(n_iter, 1, 2, P, 5)
