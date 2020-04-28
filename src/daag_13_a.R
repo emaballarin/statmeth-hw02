@@ -1,3 +1,5 @@
+set.seed(160898)
+
 # Simulate a discrete MC according to transistion matrix P, given the number of iterations and the initial state
 mc_simulation <- function(P, n, initial)
 {
@@ -20,11 +22,13 @@ mc_simulation <- function(P, n, initial)
   return(states)
 }
 
+# trasition matrix
 P <- t(matrix(c( 0.6, 0.2, 0.2,
                  0.2, 0.4, 0.4,
                  0.4, 0.3, 0.3 ), nrow = 3, ncol = 3))
 
-n_iter <- 10000
+# number of calculated states
+n_iter <- 1000
 
 # simulate chain
 MC <- numeric(n_iter)
@@ -34,3 +38,5 @@ result <- t(matrix(c("Sun", "Cloud", "Rain",
                      table(MC)/n_iter), nrow = 3, ncol = 2))
 
 print(result)
+
+
