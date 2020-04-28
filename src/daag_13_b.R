@@ -30,9 +30,6 @@ P <- t(matrix(c( 0.6, 0.2, 0.2,
                  0.2, 0.4, 0.4,
                  0.4, 0.3, 0.3 ), nrow = 3, ncol = 3))
 
-# Number of calculated states
-n_iter <- 5
-
 # Plot the result
 plotmarkov <-
   function(n=1000, start=1, window=100, transition=P, npanels=5){
@@ -49,8 +46,19 @@ plotmarkov <-
                  scales=list(x=list(relation="free"))))
   }
 
-# Let apply function
-plotmarkov(100, 1, 10, P, 1)
-
-# Let apply function
+# Let apply function 
 plotmarkov(1000, 1, 200, P, 1)
+
+# Changing number of states
+plotmarkov(3000, 1, 200, P, 1)
+
+# Changing window
+plotmarkov(3000, 1, 900, P, 1)
+
+# LOL
+plotmarkov(10000, 1, 1000, P, 5)
+
+# LOL
+plotmarkov(10000, 1, 5, P, 1)
+
+
