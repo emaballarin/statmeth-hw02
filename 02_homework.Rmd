@@ -55,12 +55,14 @@ local({
 Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
 
 ***Solution***
-```{r Lab_Ex1, code = readLines("Lab/Lab_Ex1.R"), echo=TRUE}
+
+```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
 ```
 We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 
 
 **Exercise 2**
+
 Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
 
 - Zone 1 (from 1 to 3 points): $p_1=\frac{7}{16}$;
@@ -81,8 +83,16 @@ We will try to simulate the data and perform a null-hypothesis-test, assuming th
 
 
 ***Solution***
+```{r lab_02, code = readLines("src/lab_02.R"), echo=TRUE}
+```
 
+***Observations***
 
+The low number of observations ($350$) makes the problem extremely dependent on the fixed seed: a modification of data changes significatively the computation of the $p-value$. However the conclusion does not vary.
+
+***Conclusion***
+
+We can conclude that in the first case, when we consider the bad players only, we can accept the null hypothesis: $p-value$ is, approximatively, equal to $0.815$. When the good player joins the group we have to refuse the null hypothesis: the lower $p-value$, which is approximatively equal to $2.049\times 10^{-25}$, confirms it.
 
 
 **Exercise 3**
@@ -91,8 +101,13 @@ Consider now some of the most followed Instagram accounts in 2018: for each of t
 
 ***Solution***
 
+```{r lab_03, code = readLines("src/lab_03.R"), echo=TRUE}
+```
 
+***Conclusion***
 
+The Pearson correlation coefficient measures the linear relationship between Instagram's and Twitter's data. Knowing that correlations of -1 or +1 imply an exact linear relationship, we can conclude that the resulted value $cor = -0.4235845$ implies there is not a correlation between the two datasets. Moreover, a negative correlation implies that as x increases, y decreases, where $x$ is $Instagram$ and $y$ is $Twitter$. Furthermore, the plot shows the correlation coefficient and the significance level. 
+Lastly, the $\texttt{p-value}$ roughly indicates the probability of an uncorrelated system producing datasets that have a Pearson correlation at least as extreme as the one computed from these datasets. The p-values are not entirely reliable but are probably reasonable for datasets larger than $500$ or so.
 
 
 **Exercise 4**
@@ -100,57 +115,57 @@ Consider now some of the most followed Instagram accounts in 2018: for each of t
 Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$.
 	
 ***Solution***
-	
-First of all, let's recall the definition of the $J$ matrix. Given a certain model with likelihood $l(\theta; y)$ with data $y$ and parameters set $\theta$, $J(\theta; y)$ is defined as follows:
+
+Let $l(\gamma,\beta;y)$ the log-likelihood:	
+$$
+l(\gamma,\beta;y)=n \log(\gamma)  -  n \gamma \log(\beta)  +  \gamma \sum_{i=1}^n(\log(y_i))  -  \sum_{i=1}^n(y_i/\beta)^\gamma.
+$$
+Let $J$ the matrix defined as:
 
 $$
-J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}
+J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}.
 $$
-	
-Since $J$ matrix must be derived from the log-likelihood, let's remember its expression:
-	
-$$
-l(\gamma,\beta;y)=n \log(\gamma)  -  n \gamma \log(\beta)  +  \gamma \sum_{i=1}^n(\log(y_i))  -  \sum_{i=1}^n(y_i/\beta)^\gamma
-$$
-As $J$ matrix is defined by using the second-order derivatives on model's parameters, previously first-order derivatives must be computed. In order to make the computation, it will be consiedered the next identities:
+Firstly, we compute the following sums:
 	
 $$
-	\begin{cases}
-	\sum_{i=1}^n(y_i/\beta)^\gamma = \beta^{-\gamma}\sum_{i=1}^ny_i^\gamma \ \ \ \ \ \ \mathrm{(a)} \\
-	\sum_{i=1}^n(y_i/\beta)^\gamma = \sum_{i=1}^ne^{\gamma\log(y_i/\beta)} \ \ \mathrm{(b)}
-	\end{cases}
+	\sum_{i=1}^n (y_i/\beta)^\gamma = \beta^{-\gamma}\sum_{i=1}^n y_i^\gamma \ \ \ \ \ \ \mathrm{(a)} \\
 $$
-	
-In the computation of $\partial_\gamma$ and $\partial_\beta$, (b) and (a) identities are used respectively.
+$$
+	\sum_{i=1}^n (y_i/\beta)^\gamma = \sum_{i=1}^n  e^{\gamma\log(y_i/\beta)} \ \ \mathrm{(b)}
+$$
+Hence, using $\mathrm{(a)}$ and $\mathrm{(b)}$:
 	
 $$
-\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}  -  n\log(\beta)  +  \sum_{i=1}^n\log(y_i/\beta)^\gamma   \\
+\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}  -  n\log(\beta)  +  \sum_{i=1}^n\log(y_i/\beta)^\gamma
+$$
+$$
 	\frac{\partial l(\gamma,\beta;y)}{\partial \beta} = \frac{n\gamma}{\beta}  -  \frac{\gamma}{\beta} \sum_{i=1}^ny^i/\beta
 $$
-Now it is possible to compute second-order derivatives, which constitutes the elements of the $J$ matrix. Again to compute this expressions the (a) and (b) identities are used.
+Finally we can compute the partial derivatives:
 	
 1. $\partial_{\gamma\gamma}^2$ term:
 $$
-	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma^2}  =  -\frac{n}{\gamma^2}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log\left( \frac{y_i}{\beta} \right)^2
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma^2}  =  -\frac{n}{\gamma^2}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log\left( \frac{y_i}{\beta} \right)^2;
 $$
 	
 2. $\partial_{\gamma\beta}^2$ term:
 	
 $$
-	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma\partial\beta}  =  \frac{1}{\beta} \left[ n  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma  +  \gamma\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta} \right]
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\gamma\partial\beta}  =  \frac{1}{\beta} \left[ n  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma  +  \gamma\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta} \right];
 $$
 	
 3. $\partial_{\beta\gamma}^2$ term:
 	
 $$
-	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta\partial\gamma}  =  -\frac{n}{\beta}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^{\gamma-1}  -  \frac{\gamma}{\beta}\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta}
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta\partial\gamma}  =  -\frac{n}{\beta}  +  \sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^{\gamma-1}  -  \frac{\gamma}{\beta}\sum_{i=1}^n \left( \frac{y_i}{\beta} \right)^\gamma \log \frac{y_i}{\beta};
 $$
 	
 4. $\partial_{\beta\beta}^2$ term:
 	
 $$
-	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  -\frac{n\gamma}{\beta^2}  +  \gamma(\gamma+1)\beta^{-\gamma-2} \sum_{i=1}^ny_i^\gamma
+	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  -\frac{n\gamma}{\beta^2}  +  \gamma(\gamma+1)\beta^{-\gamma-2} \sum_{i=1}^ny_i^\gamma.
 $$
+
 **Exercise 5**
 
 Produce the contour plot for the quadratic approximation of the log-likelihood, based on the Taylor series:
@@ -160,6 +175,8 @@ $$
 
 ***Solution***
 
+```{r lab_05, code = readLines("src/lab_05.R"), echo=TRUE}
+```
 
 
 # ***DAAG*** EXERCISES
@@ -213,7 +230,61 @@ __a)__
 #```{r DAAG_ex_13_cap_3, code = readLines("src/DAAG_ex_13_cap_3.R"), echo=TRUE}
 #```
 
+**Exercise 3.13**
+A Markov chain for the weather in a particular season of the year has the transition matrix, from one day to the next:
+$$
+Pb=\begin{bmatrix}
+& Sun & Cloud & Rain\\
+Sun & 0.6 & 0.2 & 0.2\\
+Cloud & 0.2 & 0.4 & 0.4\\
+Rain & 0.4 & 0.3 & 0.3
+\end{bmatrix}
+$$
+It can be shown, using linear algebra, that in the long run this Markov chain will visit the statesaccording to thestationarydistribution:
+$$
+\begin{bmatrix}Sun  & Cloud &  Rain\\
+0.429 & 0.286 & 0.286
+\end{bmatrix}
+$$
+A result called the $\textit{ergodic}$ theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
 **Exercise 6 - Cap 4**
+
+(a) Simulate $1000$ values, and calculate the proportion of times the chain visits each ofthe states. Compare the proportions given by the simulation with the above theoretical proportions.
+
+***Solution***
+
+```{r daag_13_a, code = readLines("src/daag_13_a.R"), echo=TRUE}
+```
+
+***Observations***
+
+The proportion given by the simulation depends extremely from the seed: the number of calculated states ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state, setted to $Sun$. A better result can be obtained enlarging $n$ and removing a proper amount of initial calculated states.
+
+***Conclusion***
+
+Considering $n=1000$ states, the proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
+We can observe, in fact, that for $n=1000000$ the proportion coincides with the theoretical one.
+
+
+
+(b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
+
+***Solution***
+
+In the following plots we can observe the variation of the mean, for each state, in according to the increasing of number of calculated states of the Markov Chian. We have varied the size of the window and the number of calculated states.
+
+```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
+```
+
+***Conclusion***
+
+We can observe that, combining a big size of the window and a large amount of states, the plot shows what we expect: the proportion calculated in the previous exercise is respected,
+$$
+\begin{bmatrix}Sun  & Cloud &  Rain\\
+0.429 & 0.286 & 0.286
+\end{bmatrix}
+$$
+
 
 Here we generate random normal numbers with a sequential dependence structure:
 

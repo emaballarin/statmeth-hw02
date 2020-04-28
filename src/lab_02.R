@@ -1,13 +1,13 @@
-# FUNCTIONS
+## FUNCTIONS ##
 
 chisq_term <- function(o, e)
-    {
-        return ((o-e)*(o-e)/e)
-    }
+{
+  return ((o-e)*(o-e)/e)
+}
 
-################################################################################
 
-# EXERCISE
+
+## EXERCISE ##
 
 set.seed(101)
 
@@ -36,24 +36,21 @@ pivot = 0.0
 # COMPUTE SUMS - BAD FRIENDS
 
 for (friend in (1:bad_friends))
-    {
-        pivot <- pivot + sum(chisq_term(table(throws_bad[,friend]), n*bad_prob))
-    }
+{
+  pivot <- pivot + sum(chisq_term(table(throws_bad[,friend]), n*bad_prob))
+}
 
 # TEST - BAD-ONLY FRIENDS
 
 pchisq(pivot, df=(K-1)*(bad_friends-1), lower.tail=FALSE)
 
 
-################################################################################
-
-
 # COMPUTE SUMS - GOOD FRIENDS
 
 for (friend in (1:good_friends))
-    {
-        pivot <- pivot + sum(chisq_term(table(throws_good[,friend]), n*bad_prob))
-    }
+{
+  pivot <- pivot + sum(chisq_term(table(throws_good[,friend]), n*bad_prob))
+}
 
 # TEST - GOOD+BAD FRIENDS
 
