@@ -1,11 +1,13 @@
-# FUNCTIONS
+## FUNCTIONS ##
 
 chisq_term <- function(o, e)
 {
   return ((o-e)*(o-e)/e)
 }
 
-# EXERCISE
+
+
+## EXERCISE ##
 
 set.seed(101)
 
@@ -41,6 +43,7 @@ for (friend in (1:bad_friends))
 # TEST - BAD-ONLY FRIENDS
 
 pchisq(pivot, df=(K-1)*(bad_friends-1), lower.tail=FALSE)
+
 
 # COMPUTE SUMS - GOOD FRIENDS
 
