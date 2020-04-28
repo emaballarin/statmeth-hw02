@@ -1,4 +1,4 @@
-# REQUIRED FUNCTIONS #
+## FUNCTIONS ##
 
 # Biased sample-variance, done in an efficient manner
 var_b <- function(x)
@@ -6,7 +6,9 @@ var_b <- function(x)
   var(x)*(length(x)-1)/length(x)
 }
 
-# EXERCISE #
+
+
+## EXERCISE ##
 
 set.seed(123)    # Be reproducible
 
@@ -43,5 +45,10 @@ segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
 
 # Legend
-legend(2, 1.5, legend=c("Biased sample-variance", "Un-Biased sample-variance"),
-       col=c("red", "blue"), lty=1:2, cex=0.9)
+# legend(2, 1.5, legend=c("Biased sample-variance", "Un-Biased sample-variance"),
+#        col=c("red", "blue"), lty=1:2, cex=0.9)
+
+legend("topright",
+       legend = c("Biased sample-variance", "Unbiased sample-variance"),
+       col=c("red", "blue"),
+       lty=1:1)
