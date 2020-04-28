@@ -55,12 +55,14 @@ local({
 Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
 
 ***Solution***
+
 ```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
 ```
 We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 
 
 **Exercise 2**
+
 Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
 
 - Zone 1 (from 1 to 3 points): $p_1=\frac{7}{16}$;
@@ -83,9 +85,13 @@ We will try to simulate the data and perform a null-hypothesis-test, assuming th
 ***Solution***
 ```{r lab_02, code = readLines("src/lab_02.R"), echo=TRUE}
 ```
+
 ***Observations***
+
 The low number of observations ($350$) makes the problem extremely dependent on the fixed seed: a modification of data changes significatively the computation of the $p-value$. However the conclusion does not vary.
+
 ***Conclusion***
+
 We can conclude that in the first case, when we consider the bad players only, we can accept the null hypothesis: $p-value$ is, approximatively, equal to $0.815$. When the good player joins the group we have to refuse the null hypothesis: the lower $p-value$, which is approximatively equal to $2.049\times 10^{-25}$, confirms it.
 
 
@@ -94,9 +100,12 @@ We can conclude that in the first case, when we consider the bad players only, w
 Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer. Here is the dataframe.
 
 ***Solution***
+
 ```{r lab_03, code = readLines("src/lab_03.R"), echo=TRUE}
 ```
+
 ***Conclusion***
+
 The Pearson correlation coefficient measures the linear relationship between Instagram's and Twitter's data. Knowing that correlations of -1 or +1 imply an exact linear relationship, we can conclude that the resulted value $cor = -0.4235845$ implies there is not a correlation between the two datasets. Moreover, a negative correlation implies that as x increases, y decreases, where $x$ is $Instagram$ and $y$ is $Twitter$. Furthermore, the plot shows the correlation coefficient and the significance level. 
 Lastly, the $\texttt{p-value}$ roughly indicates the probability of an uncorrelated system producing datasets that have a Pearson correlation at least as extreme as the one computed from these datasets. The p-values are not entirely reliable but are probably reasonable for datasets larger than $500$ or so.
 
@@ -165,6 +174,7 @@ l(\theta)-l(\hat{\theta}) \approx -\frac{1}{2}(\theta-\hat{\theta})^T\,J(\hat{\t
 $$
 
 ***Solution***
+
 ```{r lab_05, code = readLines("src/lab_05.R"), echo=TRUE}
 ```
 
@@ -202,20 +212,30 @@ A result called the $\textit{ergodic}$ theorem allows us to estimate this distri
 (a) Simulate $1000$ values, and calculate the proportion of times the chain visits each ofthe states. Compare the proportions given by the simulation with the above theoretical proportions.
 
 ***Solution***
+
 ```{r daag_13_a, code = readLines("src/daag_13_a.R"), echo=TRUE}
 ```
+
 ***Observations***
+
 The proportion given by the simulation depends extremely from the seed: the number of calculated states ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state, setted to $Sun$. A better result can be obtained enlarging $n$ and removing a proper amount of initial calculated states.
 
 ***Conclusion***
+
 Considering $n=1000$ states, the proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
 We can observe, in fact, that for $n=1000000$ the proportion coincides with the theoretical one.
 
 
+
 (b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
+
+***Solution***
+In the following plots we can observe the changing of mean in according to the increasing of number of calculated states of the Markov Chian.
+
 ```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
 ```
-BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH
+
+***Conclusion***
 
 # ***CS*** EXERCISES
 
