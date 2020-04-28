@@ -41,3 +41,18 @@ result <- t(matrix(c("Sun", "Cloud", "Rain",
 print(result)
 
 
+# Let augment n
+# Number of calculated states
+n_iter <- 1000000
+
+# Simulate chain
+MC <- numeric(n_iter)
+MC <- mc_simulation( P, n_iter, 1 )
+
+result <- t(matrix(c("Sun", "Cloud", "Rain",
+                     table(MC)/n_iter), nrow = 3, ncol = 2))
+
+# Print the result
+print(result)
+
+

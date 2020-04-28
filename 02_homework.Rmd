@@ -194,7 +194,7 @@ $$
 It can be shown, using linear algebra, that in the long run this Markov chain will visit the statesaccording to thestationarydistribution:
 $$
 \begin{bmatrix}Sun  & Cloud &  Rain\\
-0.641 &  0.208  & 0.151
+0.429 & 0.286 & 0.286
 \end{bmatrix}
 $$
 A result called the $\textit{ergodic}$ theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
@@ -206,8 +206,11 @@ A result called the $\textit{ergodic}$ theorem allows us to estimate this distri
 ```
 ***Observations***
 The proportion given by the simulation depends extremely from the seed: the number of calculated states ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state, setted to $Sun$. A better result can be obtained enlarging $n$ and removing a proper amount of initial calculated states.
+
 ***Conclusion***
-The proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
+Considering $n=1000$ states, the proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
+We can observe, in fact, that for $n=1000000$ the proportion coincides with the theoretical one.
+
 
 (b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
 ```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
