@@ -22,7 +22,8 @@ ggpubr::ggscatter(all, x = 'Instagram', y = 'Twitter',
           add = "reg.line",
           add.params = list(color = "blue", fill = "lightgray"),  # for the line
           conf.int = TRUE,
-          cor.coef = TRUE, cor.method = "pearson",
+          cor.coef = TRUE, 
+          cor.method = "pearson",
           xlab = "Instagram", ylab = "Twitter",
           xlim=c(60, 150), ylim=c(40, 120))
 
@@ -30,6 +31,6 @@ ggpubr::ggscatter(all, x = 'Instagram', y = 'Twitter',
 pearson <- cor.test(Instagram, Twitter,
                     method = "pearson")
 
-# Print the seeked p-value
+# Print the result
 
-pearson$p.value
+pearson
