@@ -61,23 +61,40 @@ We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ te
 
 
 **Exercise 2**
+Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
 
-Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+- Zone 1 (from 1 to 3 points): $p_1=\frac{7}{16}$;
+
+- Zone 2 (from 4 to 6 points); $p_2=\frac{5}{16}$;
+
+- Zone 3 (from 7 to 9 points); $p_3=\frac{3}{16}$;
+
+- Zone 4 (the highest points in the middle of the target, say 10, 25, 50 points): $p_4=\frac{1}{16}$;
+
+The number of players is equal to $7$ and each of them throws $50$ darts, which corresponds to the number of considered observations ($n=50$ for each player). 
+
+We assume as null hypothesis: $\textit{due to a moderate control on his darts skills, he has decreasing probabilities to hit the best zones}$,
+$$
+H_0 : \,p_1=\frac{7}{16};\,\,\,\,p_2=\frac{5}{16};\,\,\,\,p_3=\frac{3}{16};\,\,\,\,p_4=\frac{1}{16}.
+$$
+We will try to simulate the data and perform a null-hypothesis-test, assuming that one of the $7$ players is a great player.
+
 
 ***Solution***
 ```{r Lab_Ex2, code = readLines("Lab/Lab_Ex2.R"), echo=TRUE}
 ```
-We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
 
 
 **Exercise 3**
 
-Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer. Here is the dataframe.
 
 ***Solution***
 ```{r Lab_Ex3, code = readLines("Lab/Lab_Ex3.R"), echo=TRUE}
 ```
-We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+
 
 
 **Exercise 4**
@@ -138,12 +155,16 @@ $$
 $$
 **Exercise 5**
 
-Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+Produce the contour plot for the quadratic approximation of the log-likelihood, based on the Taylor series:
+$$
+l(\theta)-l(\hat{\theta}) \approx -\frac{1}{2}(\theta-\hat{\theta})^T\,J(\hat{\theta})(\theta-\hat{\theta}).
+$$
 
 ***Solution***
 ```{r Lab_Ex5, code = readLines("Lab/Lab_Ex5.R"), echo=TRUE}
 ```
-We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+
 # ***DAAG*** EXERCISES
 
 **Exercise 1**
