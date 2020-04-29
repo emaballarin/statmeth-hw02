@@ -19,11 +19,13 @@ eff_method <- function(z){
 }
 
 n <- 100000; z <- rnorm(n)
-naive_time <- system.time(zneg_1 <- naive_method(n, z))
-eff_time <- system.time(zneg_2 <- eff_method(z))
+naive_time <- system.time(zneg_1 <- naive_method(n, z))  # Nested ass't (some linters may complain)
+eff_time <- system.time(zneg_2 <- eff_method(z))         # Nested ass't (some linters may complain)
 
+# Check for equality
 comparison <- zneg_1 == zneg_2
-paste("elements that are diffent:", which(comparison == FALSE))
+paste("Elements that are diffent: ", which(comparison == FALSE))
 
-print("naive time:"); naive_time
-print("eff time:"); eff_time
+# Benchmark
+print("Naive time:"); naive_time
+print("Efficient time:"); eff_time

@@ -4,7 +4,7 @@ author: "P. Morichetti, L. Arrighi and E. Ballarin | Group 'I'"
 date: "29th April 2020"
 output:
   html_document:
-    toc: yes
+    toc: no
   beamer_presentation:
     highlight: tango
   include: null
@@ -34,7 +34,6 @@ fontsize: 10pt
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(fig.align = 'center', warning=FALSE, message=FALSE, fig.asp=0.625, dev='png', global.par = TRUE, dev.args=list(pointsize=10), fig.path = 'figs/')
-library(MASS)
 ```
 
 ```{r setup, include=FALSE}
@@ -47,25 +46,28 @@ local({
 })
 ```
 
-# EXERCISES {.tabset}
+# Exercises: {.tabset}
 
-## LAB EXERCISES {.tabset}
+## LAB {.tabset}
 
-### Exercise 1 
+### Ex. 1 
 
-Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
+Check the *biased* nature of $s^2_b$ via MC simulation, generating $n=10$ *iid* values from a Normal distribution. Plot also $s^2$ and comment the difference.
+
 
 #### Solution
 
 ```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
 ```
 
-Form the obtained plot, we can observe that the maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+**Observations and conclusions:**  
+Form the obtained plot, we can observe that the maximums for the distributions of estimators $s^2$ and $s^2_b$ don't coincide, with $\text{max}(s^2)$ closer to the true value of $\sigma^2 = 1$. This still holds true as the sample size $n$ increases. Given the *unbiased* nature of $s^2$, we can then conclude that $s^2_b$ is a *biased* estimator. The orange line identifies the true value of $\sigma^2 = 1$.
 
 
-### Exercise 2 
+### Ex. 2 
 
-Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
+Let us consider a darts target divided into $K=4$ radial zones. We assign to each zone the following hitting probability:
 
 - Zone 1 (from 1 to 3 points): $p_1=\frac{7}{16}$;
 
@@ -73,56 +75,75 @@ Let consider a darts target into $K=4$ zones. Hence we assign the following hitt
 
 - Zone 3 (from 7 to 9 points); $p_3=\frac{3}{16}$;
 
-- Zone 4 (the highest points in the middle of the target, say 10, 25, 50 points): $p_4=\frac{1}{16}$;
+- Zone 4 (the highest points in the middle of the target; say: 10, 25, 50 points): $p_4=\frac{1}{16}$;
 
-The number of players is equal to $7$ and each of them throws $50$ darts, which corresponds to the number of considered observations ($n=50$ for each player). 
+The number of players is equal to $6$ and each of them throws $50$ darts, which corresponds to the number of considered observations ($n=50$ for each player). 
 
-We assume as null hypothesis: $\textit{due to a moderate control on his darts skills, he has decreasing probabilities to hit the best zones}$,
+We assume as null hypothesis: *due to a moderate control on darts skills, each friend has decreasing probabilities to hit the best zones, according to the table outlined just above* i.e.:
 $$
 H_0 : \,p_1=\frac{7}{16};\,\,\,\,p_2=\frac{5}{16};\,\,\,\,p_3=\frac{3}{16};\,\,\,\,p_4=\frac{1}{16}.
 $$
-We will try to simulate the data and perform a null-hypothesis-test, assuming that one of the $7$ players is a great player.
+
+We try to simulate the data and perform a *null-hypothesis-test*, assuming that:
+
+- *Firstly:* the players asymptotically behave exaclty according to the probabilities defining $H_0$;
+
+- *Secondly:* a player is added (meaning: $7$ total players), whose skills in playing darts are such that the hitting probability of best zones is proportional to their *points*.
+
+All hypothesis testing involved is performed via *Pearson's* $\chi^2$ *homogeneity testing* among the single-player distribution samples for the darts hit-zones.
 
 
 #### Solution
 ```{r lab_02, code = readLines("src/lab_02.R"), echo=TRUE}
 ```
 
-#### Observations
 
-The low number of observations ($350$) makes the problem extremely dependent on the fixed seed: a modification of data changes significatively the computation of the $p-value$. However the conclusion does not vary.
+**Observations:**
 
-#### Conclusion
-
-We can conclude that in the first case, when we consider the bad players only, we can accept the null hypothesis: $p-value$ is, approximatively, equal to $0.815$. When the good player joins the group we have to refuse the null hypothesis: the lower $p-value$, which is approximatively equal to $2.049\times 10^{-25}$, confirms it.
+The relatively low number of observations ($280,350$) makes the simulation heavily-dependent on the initially-set simulation seed: a modification of produced data changes significatively the computation of the *p-values* involved. However the general conclusion does not vary.
 
 
-### Exercise 3
+**Conclusions:**
 
-Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer. Here is the dataframe.
+We can conclude that in the first case, when we consider *moderately bad* players only, we cannot reject the null hypothesis for a reasonable range of significancies: $p$ is generally close to $0.85$ across many of the tested *seeds*. When the good player joins, we have to reject the null hypothesis for any reasonable level of significance: $p$, which is almost always *sub-millesimal*.
+
+
+### Ex. 3
+
+Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer.
 
 #### Solution
 
 ```{r lab_03, code = readLines("src/lab_03.R"), echo=TRUE}
 ```
 
-#### Conclusion
+**Observations:**
 
-The Pearson correlation coefficient measures the linear relationship between Instagram's and Twitter's data. Knowing that correlations of -1 or +1 imply an exact linear relationship, we can conclude that the resulted value $cor = -0.4235845$ implies there is not a correlation between the two datasets. Moreover, a negative correlation implies that as x increases, y decreases, where $x$ is $Instagram$ and $y$ is $Twitter$. Furthermore, the plot shows the correlation coefficient and the significance level. 
-Lastly, the $\texttt{p-value}$ roughly indicates the probability of an uncorrelated system producing datasets that have a Pearson correlation at least as extreme as the one computed from these datasets. The p-values are not entirely reliable but are probably reasonable for datasets larger than $500$ or so.
+The *Pearson correlation coefficient* in this case measures the linear relationship between Instagram and Twitter followers data, bounded by the fact that correlations of $-1$ and $+1$ imply (respectively) an exact (anti-)linear relationship.
+
+Firstly, it must be noted that -- due to the very reduced sample size -- results coming from such observations hardly can be generalized to the distribution the sample is a representative of.
+
+The observed correlation amounts to $cor = -0.424$ and evidences moderate anticorrelation between Twitter and Instagram followers count in the considered sample.
+
+However, significance testing of the *Null Hipothesis* $H_0:$ *true correlation is equal to 0* leads to the conclusion it cannot be rejected, with $p = 0.295$. This is also confirmed by a $95\%$ confidence interval compatible with $R=0$
 
 
-### Exercise 4 
+**Conclusions:**
 
-Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$.
+It is not possible to reject the null hypothesis stating that Twitter and Instagram follower count is uncorrelated for the people the dataset is representative of.
+
+
+### Ex. 4 
+
+Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$, i.e. the single *Observed Information Matrix* terms for a *bidimensional Weibull model*.
 	
 #### Solution
 
-Let $l(\gamma,\beta;y)$ the log-likelihood:	
+Let $l(\gamma,\beta;y)$ be the log-likelihood for such model:	
 $$
 l(\gamma,\beta;y)=n \log(\gamma)  -  n \gamma \log(\beta)  +  \gamma \sum_{i=1}^n(\log(y_i))  -  \sum_{i=1}^n(y_i/\beta)^\gamma.
 $$
-Let $J$ the matrix defined as:
+Let $J$ be the *Observed Information Matrix*, defined as:
 
 $$
 J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}.
@@ -153,7 +174,7 @@ $$
 	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  \frac{n\gamma}{\beta^2}  -  \frac{\gamma(\gamma+1)}{\beta^{\gamma+2}} \sum_{i=1}^ny_i^\gamma.
 $$
 
-### Exercise 5
+### Ex. 5
 
 Produce the contour plot for the quadratic approximation of the log-likelihood, based on the Taylor series:
 $$
@@ -166,9 +187,9 @@ $$
 ```
 
 
-## DAAG EXERCISES {.tabset}
+## DAAG {.tabset}
 
-### Exercise 11 - Cap 3 
+### Ex. 3.11 
 
 The following data represent the total number of aberrant crypt foci (abnormal growths in the colon) observed in seven rats that had been administered a single dose of the carcinogen azoxymethane and sacrificed after six weeks (thanks to Ranjana Bird, Faculty of Human Ecology, University of Manitoba for the use of these data):
 
@@ -178,8 +199,8 @@ $$ \begin{matrix}
                         
 Enter these data and compute their sample mean and variance. Is the Poisson model appropriate for these data? To investigate how the sample variance and sample mean differ under the Poisson assumption, repeat the following simulation experiment several times:
 
-```
-x <- rpois(7, 78.3) \\
+```{r}
+x <- rpois(7, 78.3)
 mean(x); var(x)
 ```
 
@@ -188,7 +209,22 @@ mean(x); var(x)
 ```{r DAAG_ex_11_cap_3, code = readLines("src/DAAG_ex_11_cap_3.R"), echo=TRUE}
 ```
 
-### Exercise 13 - Cap 3 
+
+**Observations:**
+
+In order to investigate the behaviour of *mean* and *variance* of many different samples generated according to a Poisson distribution -- and knowing the expected theoretical result -- we analyzed in the form of a histogram the absolute-value difference among means and variances for each sample.  
+
+The result, shown above, further confirms the idea of testing for *Poissonity* via checking for coinciding *mean* and *variance* in a sample.
+
+This concept has been e.g. formalized in *[Fisher, 1950]* via the *Dispersion test*, which we use. The resulting statistic distributes asymptotically as a $\chi^2$ with $\#d.f.$ one less than sample size.
+
+
+**Conclusions:**
+
+$\chi^2$ testing on the sample dispersion gives a $p=0.056$ and conventional practice would suggest a very borderline acceptance of the null hypothesis. However, given the small sample size and the heavy constraint on mean and variance imposed by Poissonity, it could not be straightforwardly advisable to assume Poissonity upfront for modelling needs. An increased sample size -- if possible -- should be gathered; or a more flexible distribution could be used instead.  
+Acceptance of Poissonity with $p=0.056$ and no clear pre-stateable significance level would seem like $p$-hacking.
+
+### Ex. 3.13 
 
 A Markov chain for the weather in a particular season of the year has the transition matrix, from one day to the next:
 
@@ -203,53 +239,56 @@ It can be shown, using linear algebra, that in the long run this Markov chain wi
 
 $$ \begin{matrix}
 sun   & cloud & rain\\ 
-0.641 & 0.208 & 0.151
+0.429 & 0.286 & 0.286
 \end{matrix} $$
 
 A result called the ergodic theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
 
-a) Simulate 1000 values, and calculate the proportion of times the chain visits each of the states. Compare the proportions given by the simulation with the above theoretical proportions.
+**a)** Simulate $1000$ values, and calculate the proportion of times the chain visits each of the states. Compare the proportions given by the simulation with the above theoretical proportions.
 
-b) Here is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function rollmean() from the zoo package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
+**b)** Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
 
-#### Solution
+#### Solution (a)
 
 ```{r daag_13_a, code = readLines("src/daag_13_a.R"), echo=TRUE}
 ```
 
-#### Observations
+**Observations**
 
-The proportion given by the simulation depends extremely from the seed: the number of calculated states ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state, setted to $Sun$. A better result can be obtained enlarging $n$ and removing a proper amount of initial calculated states.
+The proportion among different states "visited" by the chain depends heavily on the seed and on the initial state of the chain itself. The stated number of total states to consider ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state. A better result can be obtained by enlarging $n$ and by not considering a proper amount of visited states from the beginning of the simulation (so-called *burn-in*).
 
-#### Conclusion
+**Conclusion**
 
-Considering $n=1000$ states, the proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
-We can observe, in fact, that for $n=1000000$ the proportion coincides with the theoretical one.
+Considering $n=1000$ states from the start of the simulation, the proportion among visited states is not consistent with the the theoretical convergence result. Though, a dominance of the $Sun$ state is observed.  
+Dependence on lack of *burn-in* and a small averaging-sample size is confirmed, in fact, by the observation that with a proper (e.g. $n=1000000$) number of states considered -- even putting *burn-in* apart --  the proportion coincides with the theoretical one.
 
 
+#### Solution (b)
 
-(b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
-
-#### Solution
-
-In the following plots we can observe the variation of the mean, for each state, in according to the increasing of number of calculated states of the Markov Chian. We have varied the size of the window and the number of calculated states.
+In the following plots, we can observe the variation of the rolling average -- for each state -- computed for an increasing number of visited states of the Markov Chain and for a different window size.
 
 ```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
 ```
 
-#### Conclusion
 
-We can observe that, combining a big size of the window and a large amount of states, the plot shows what we expect: the proportion calculated in the previous exercise is respected,
+**Observations**
+
+As almost always, a *one size fits all* approach is rarely applicable, and this is also the case. By increasing the number of total observed states the chain is pushed towards convergence and more stable results will follow. On the other hand, an increased window size can forcefully average results, giving a clearer idea of converged results but covering eventual stationarity in variation.
+
+
+**Conclusion**
+
+We can generally observe that, combining a sufficiently large size of the window and a sufficiently far horizon the plot shows what we expect: the convergence proportion is clear and respected statistically,
 $$
 \begin{bmatrix}Sun  & Cloud &  Rain\\
 0.429 & 0.286 & 0.286
 \end{bmatrix}
 $$
 
-### Exercise 6 - Cap 4 
+### Ex. 4.6 
 
 
-Here we generate random normal numbers with a sequential dependence structure:
+Generate random normal numbers with a sequential dependence structure:
 
 ```{r}
 y1 <- rnorm(51)
@@ -265,10 +304,18 @@ Repeat this several times. There should be no consistent pattern in the acf plot
 ```{r DAAG_ex_6_cap_4, code = readLines("src/DAAG_ex_6_cap_4.R"), echo=TRUE}
 ```
 
-In the top plot (series y1) there isn't a clear path on the same lag, neither on each lags. In the other hand, in the bottom plot, it seems to be a fairly consistent path among the three series: there are few lags in which the series have, more or less, the same correlation. 
-Moreover, it is clear that exist a kind of sinusoidal function among lags for the same collection (and it is showen for each collection) with 6/7 lags of period; in the end the three series seems to be out-of-phases among them.
 
-### Exercise 7 - Cap 4 
+**Observations and conclusions:**  
+
+In order to analyze the problem at hand, some autocorrelation plots have been made by repeating the gerenation of both Normal and sequentially-dependent random numbers.
+
+In the top plot ($y_1$ series) no easily distinguishable pattern is evident: neither among different samples, nor along the sequence of generated values. Along-sequence correlation is randomly distributed and same-lag behaviour is randomic too.
+
+In the bottom plot ($y$ series) a clear pattern emerges. The plot shows a periodic behaviour of the autocorrelation function along the sequence. A rough estimate of such period seems to be around $6$ lags.  
+Among different samples there seems to be no evident relationship w.r.t. autocorrelation, apart from the evidence they seem to be out of phase, as expected by the indipendent generation of sample-vectors from the $y_1$ sequence.
+
+
+### Ex. 4.7 
 
 Create a function that does the calculations in the first two lines of the previous exercise. Put the calculation in a loop that repeats 25 times. Calculate the mean and variance for each vector y that is returned. Store the 25 means in the vector av, and store the 25 variances in the vector v. Calculate the variance of av.
 
@@ -277,9 +324,9 @@ Create a function that does the calculations in the first two lines of the previ
 ```{r DAAG_ex_7_cap_4, code = readLines("src/DAAG_ex_7_cap_4.R"), echo=TRUE}
 ```
 
-## CS EXERCISES {.tabset}
+## CS {.tabset}
 
-### Exercise 3.3 - Cap 3
+### Ex. 3.3
 
 Rewrite the following, replacing the loop with efficient code:
 
@@ -301,10 +348,9 @@ Confirm that your rewrite is faster but gives the same result.
 ```{r CS_ex_3_3_cap3, code = readLines("src/CS_ex_3_3_cap_3.R"), echo=TRUE}
 ```
 
-### Exercise 3.5 - Cap 3
+### Ex. 3.5
 
-Consider solving the matrix equation $Ax = y$ for $x$ , where $y$ is a known $n$
-vector and $A$ is a known $n × n$ matrix. The formal solution to the problem is
+Consider solving the matrix equation $Ax = y$ for $x$ , where $y$ is a known $n$-vector and $A$ is a known $n \times n$ matrix. The formal solution to the problem is
 $x = A^{-1} \cdot y$ , but it is possible to solve the equation directly, without actually
 forming $A^{−1}$ . This question explores this direct solution. Read the help file
 for solve before trying it.
@@ -335,4 +381,9 @@ d) What do you conclude?
 ```{r CS_ex_3_5_cap_3, code = readLines("src/CS_ex_3_5_cap_3.R"), echo=TRUE}
 ```
 
-From the experiment results the best choice is to use $solve$ function to directly solve for $x$ without forming $A^{-1}$; indeed, both mean absolute difference and system time are much less then the other option
+From the experimental results outlined above, the *best choice* to solve linear systems is to use the `solve` function, without forming $A^{-1}$; indeed, both mean absolute difference and system time are much less then the other option.
+
+<!-- AN EASTER EGG... -->
+<!-- This allows us to prove -- also for $\mathtt{R}$ -- the (informal) *Dietterich Theorem*:   -->
+<!-- *To numerically solve a linear system you need to understand the meaning of 'Never'. Then, indeed, never invert matrices. It's true in every programming language.*   -->
+<!-- *(Thomas G. Dietterich, 2018)* -->

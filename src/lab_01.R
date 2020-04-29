@@ -10,7 +10,7 @@ var_b <- function(x)
 
 ## EXERCISE ##
 
-set.seed(123)    # Be reproducible
+set.seed(123)
 
 R <- 1000        # Replications
 n <- 10          # Samples per Replication
@@ -32,7 +32,7 @@ par(mfrow=c(1,1), oma=c(0,0,0,0))
 
 # Biased sample-variance (hist)
 hist(samples_stat, breaks= 40, probability = TRUE,
-     xlab=expression(sb^2), main= bquote(sb^2), cex.main=1.5, ylim = c(0, 1.5))
+     xlab=expression(sb^2), main= bquote(Histogram: sb^2), cex.main = 1.5, ylim = c(0, 1.5))
 
 # Biased sample-variance (line)
 curve(((n)/sigma^2) * dchisq(x * ((n)/sigma^2), df = n - 1),
@@ -47,6 +47,6 @@ segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
 
 legend("topright",
-       legend = c("Biased sample-variance", "Unbiased sample-variance"),
+       legend = c("Biased sample-variance (dist.)", "Unbiased sample-variance (dist.)"),
        col=c("red", "blue"),
        lty=1:1)

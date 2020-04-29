@@ -53,6 +53,13 @@ solve(jhat)
 log_lik_qdiff <- function(data, param)
     {
         diffterm <- (param - weib.y.mle)
+
+        # Note that in Taylor expansion around MLE-estimates:
+        # - 0th order term is a fixed constant;
+        # - 1st order term is 0.
+        #
+        # For that reason, 2nd+ order terms only account for the relative log-likelihood computation.
+
         -0.5*t(diffterm)%*%jhat%*%diffterm
     }
 

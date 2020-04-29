@@ -46,16 +46,41 @@ plotmarkov <-
                  scales=list(x=list(relation="free"))))
   }
 
-# Let apply function
+# Somehow a starting point:
 plotmarkov(1000, 1, 200, P, 1)
 
-# Changing number of states
+# Changing window size:
+plotmarkov(1000, 1, 500, P, 1)
+
+# Changing overall number of states:
+plotmarkov(2000, 1, 200, P, 1)
+
+# Changing window size:
+plotmarkov(2000, 1, 500, P, 1)
+
+# Changing overall number of states:
 plotmarkov(3000, 1, 200, P, 1)
 
-# Changing window
+# Changing window size:
+plotmarkov(3000, 1, 500, P, 1)
+
+# Changing window size:
 plotmarkov(3000, 1, 900, P, 1)
 
-# Five panels
+# Changing overall number of states:
+plotmarkov(4000, 1, 200, P, 1)
+
+# Changing window size:
+plotmarkov(4000, 1, 500, P, 1)
+
+# Changing window size:
+plotmarkov(4000, 1, 900, P, 1)
+
+# Changing both:
+plotmarkov(5000, 1, 1000, P, 1)
+
+# Changing both:
+plotmarkov(10000, 1, 2000, P, 1)
+
+# Five-panel plot of different chains
 plotmarkov(10000, 1, 1000, P, 5)
-
-

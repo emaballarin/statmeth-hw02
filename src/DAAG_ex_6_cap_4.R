@@ -7,7 +7,7 @@ par(mfrow=c(2, 1))
 for(i in 1:3){
   y1 <- rnorm(51)
   y <- y1[-1] + y1[-51]
-  
+
   y1_acf[[i]] <- acf(y1, na.action=na.pass, plot=FALSE)
   y_acf[[i]] <- acf(y, na.action=na.pass, plot=FALSE)
 }
