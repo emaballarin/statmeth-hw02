@@ -125,9 +125,9 @@ Let $J$ the matrix defined as:
 $$
 J(\theta;y)  =  -\frac{\partial^2 l(\theta;y)}{\partial\theta \partial\theta^T}.
 $$
-
+Then:
 $$
-\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}   -  n\log(\beta)  + \sum_{i=1}^n\log(y_i) - \sum_{i=1}^n\log\left(\frac{y_i}{\beta}\right)^\gamma\log\left(\frac{y_i}{\beta}\right)
+\frac{\partial l(\gamma,\beta;y)}{\partial \gamma}  =  \frac{n}{\gamma}   -  n\log(\beta)  + \sum_{i=1}^n\log(y_i) - \sum_{i=1}^n\log\left(\frac{y_i}{\beta}\right)^\gamma\log\left(\frac{y_i}{\beta}\right);
 $$
 $$
 	\frac{\partial l(\gamma,\beta;y)}{\partial \beta} = -\frac{n\gamma}{\beta}  +  \frac{\gamma}{\beta^{\gamma+1}} \sum_{i=1}^n y_i^\gamma.
