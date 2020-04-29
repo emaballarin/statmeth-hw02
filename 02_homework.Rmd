@@ -1,7 +1,7 @@
 ---
 title: "SMDS Homework - Block 2"
 author: "P. Morichetti, L. Arrighi and E. Ballarin | Group 'I'"
-date: "22nd April 2020"
+date: "29th April 2020"
 output:
   html_document:
     toc: yes

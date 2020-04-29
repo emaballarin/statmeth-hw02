@@ -8,20 +8,20 @@ mc_simulation <- function(P, n, initial)
 {
   # Number of possible states
   s_states <- nrow(P)
-  
+
   # States through time
   states <- numeric(n)
-  
+
   # Initial state
   states[1] <- initial
-  
+
   for(t in (2:n))
   {
     # Next state
     p <- P[states[t-1],]
     states[t] <- which(rmultinom(1, 1, p) == 1)
   }
-  
+
   return(states)
 }
 
@@ -46,7 +46,7 @@ plotmarkov <-
                  scales=list(x=list(relation="free"))))
   }
 
-# Let apply function 
+# Let apply function
 plotmarkov(1000, 1, 200, P, 1)
 
 # Changing number of states
@@ -55,10 +55,7 @@ plotmarkov(3000, 1, 200, P, 1)
 # Changing window
 plotmarkov(3000, 1, 900, P, 1)
 
-# LOL
+# Five panels
 plotmarkov(10000, 1, 1000, P, 5)
-
-# LOL
-plotmarkov(10000, 1, 5, P, 1)
 
 

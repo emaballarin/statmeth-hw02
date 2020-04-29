@@ -9,7 +9,7 @@ chisq_term <- function(o, e)
 
 ## EXERCISE ##
 
-set.seed(101)
+set.seed(1023)
 
 # Observation nr., friends, zones, probabilities
 

@@ -20,7 +20,7 @@ sigma <- 1       # Normal StdDev
 
 samples <- array(0, c(R, n))
 for (i in 1:R){
-  samples[i, ] <- rnorm(n, 0, sigma)    # Can we be more efficient without rewriting everything?
+  samples[i, ] <- rnorm(n, 0, sigma)
 }
 
 samples_stat <- array(0, R)
@@ -29,7 +29,9 @@ samples_stat <- apply(samples, 1, var_b)
 
 par(mfrow=c(1,1), oma=c(0,0,0,0))
 
-hist(samples_stat, breaks= 40, probability = TRUE,    # Biased sample-variance (hist)
+
+# Biased sample-variance (hist)
+hist(samples_stat, breaks= 40, probability = TRUE,
      xlab=expression(sb^2), main= bquote(sb^2), cex.main=1.5, ylim = c(0, 1.5))
 
 # Biased sample-variance (line)
@@ -43,10 +45,6 @@ curve(((n-1)/sigma^2) * dchisq(x * ((n-1)/sigma^2), df = n - 1),
 # Make the "bias" more apparent
 segments(1, 0, 1, 1.2,
          col="orange", lwd=2)
-
-# Legend
-# legend(2, 1.5, legend=c("Biased sample-variance", "Un-Biased sample-variance"),
-#        col=c("red", "blue"), lty=1:2, cex=0.9)
 
 legend("topright",
        legend = c("Biased sample-variance", "Unbiased sample-variance"),

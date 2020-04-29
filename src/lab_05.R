@@ -9,12 +9,13 @@ log_lik_weibull <- function(data, param)
 
 
 ## EXERCISE ##
+
 # data
 y <- c(155.9, 200.2, 143.8, 150.1,152.1, 142.2, 147, 146, 146, 170.3, 148, 140, 118, 144, 97)
 n <- length(y)
 
 
-#define parameters grid
+# define parameters grid
 gamma <- seq(0.1, 15, length=100)
 beta <- seq(100,200, length=100)
 parvalues <- expand.grid(gamma,beta)
@@ -31,12 +32,13 @@ gammahat<-uniroot(function(x) n/x+sum(log(y))-n*
                   c(1e-5,15))$root
 betahat<- mean(y^gammahat)^(1/gammahat)
 weib.y.mle<-c(gammahat,betahat)
-#first element is the MLE for the shape gamma, second element the MLE for the scale beta
+
+# first element is the MLE for the shape gamma, second element the MLE for the scale beta
 weib.y.mle
 
 
 
-#observed information matrix
+# observed information matrix
 jhat<-matrix(NA,nrow=2,ncol=2)
 jhat[1,1]<-n/gammahat^2+sum((y/betahat)^gammahat*
                                 (log(y/betahat))^2)
@@ -60,7 +62,7 @@ c_llikvalues <- apply(parvalues, 1, log_lik_qdiff, data=y)
 c_llikvalues <- matrix(c_llikvalues, nrow=length(gamma), ncol=length(beta), byrow=F)
 
 
-#contour plot
+# contour plot
 contour(gamma, beta, c_llikvalues,
         levels=-qchisq(conf.levels, 2)/2,
         xlab=expression(gamma),
