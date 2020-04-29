@@ -58,7 +58,8 @@ Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid valu
 
 ```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
 ```
-We can observe that maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
+
+Form the obtained plot, we can observe that the maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 
 
 **Exercise 2**
