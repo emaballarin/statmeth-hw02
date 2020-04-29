@@ -1,15 +1,12 @@
-# DAAG EXERCISES
-
-## ex. 11 cap. 3
-
 aberrant_crypt <- c(87, 53, 72, 90, 78, 85, 83)
 n <- length(aberrant_crypt)
 M <- 10000
+
 crypt_mean <-mean(aberrant_crypt)
 crypt_var <- var(aberrant_crypt)
 
-paste("aberrant crypt mean:", crypt_mean)
-paste("aberrant crypt variance:", crypt_var)
+paste("Aberrant crypt foci mean:", crypt_mean)
+paste("Aberrant crypt foci variance:", crypt_var)
 
 vec_mean <- c()
 vec_var <- c()
@@ -19,9 +16,9 @@ for (i in 0:M-1){
   vec_var <- c(vec_var, var(x))
 }
 
-hist(x = abs(vec_mean -vec_var), 
-     main = "Difference between mean and variance", 
-     xlab = "|mean - var|", 
+hist(x = abs(vec_mean -vec_var),
+     main = "Difference between mean and variance",
+     xlab = "|mean - var|",
      ylab = "frequency")
 
 # the histogram shows the absolute difference between means and variances,

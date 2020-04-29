@@ -226,32 +226,6 @@ b) Here is code that calculates rolling averages of the proportions over a numbe
 
 ***Solution***
 
-__a)__
-#```{r DAAG_ex_13_cap_3, code = readLines("src/DAAG_ex_13_cap_3.R"), echo=TRUE}
-#```
-
-**Exercise 3.13**
-A Markov chain for the weather in a particular season of the year has the transition matrix, from one day to the next:
-$$
-Pb=\begin{bmatrix}
-& Sun & Cloud & Rain\\
-Sun & 0.6 & 0.2 & 0.2\\
-Cloud & 0.2 & 0.4 & 0.4\\
-Rain & 0.4 & 0.3 & 0.3
-\end{bmatrix}
-$$
-It can be shown, using linear algebra, that in the long run this Markov chain will visit the statesaccording to thestationarydistribution:
-$$
-\begin{bmatrix}Sun  & Cloud &  Rain\\
-0.429 & 0.286 & 0.286
-\end{bmatrix}
-$$
-A result called the $\textit{ergodic}$ theorem allows us to estimate this distribution by simulating the Markov chain for a long enough time.
-
-(a) Simulate $1000$ values, and calculate the proportion of times the chain visits each ofthe states. Compare the proportions given by the simulation with the above theoretical proportions.
-
-***Solution***
-
 ```{r daag_13_a, code = readLines("src/daag_13_a.R"), echo=TRUE}
 ```
 
@@ -293,7 +267,6 @@ Here we generate random normal numbers with a sequential dependence structure:
 y1 <- rnorm(51)
 y <- y1[-1] + y1[-51]
 acf(y1)  # acf is ‘autocorrelation function’
-# (see Chapter 9)
 acf(y)
 ```
 
@@ -307,7 +280,7 @@ Repeat this several times. There should be no consistent pattern in the acf plot
 In the top plot (series y1) there isn't a clear path on the same lag, neither on each lags. In the other hand, in the bottom plot, it seems to be a fairly consistent path among the three series: there are few lags in which the series have, more or less, the same correlation. 
 Moreover, it is clear that exist a kind of sinusoidal function among lags for the same collection (and it is showen for each collection) with 6/7 lags of period; in the end the three series seems to be out-of-phases among them.
 
-**Exercise 11 - Cap 3**
+**Exercise 7 - Cap 4**
 
 Create a function that does the calculations in the first two lines of the previous exercise. Put the calculation in a loop that repeats 25 times. Calculate the mean and variance for each vector y that is returned. Store the 25 means in the vector av, and store the 25 variances in the vector v. Calculate the variance of av.
 
