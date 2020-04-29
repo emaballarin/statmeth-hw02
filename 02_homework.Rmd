@@ -47,14 +47,15 @@ local({
 })
 ```
 
+# EXERCISES {.tabset}
 
-# ***LAB*** EXERCISES
+## LAB EXERCISES {.tabset}
 
-**Exercise 1**
+### Exercise 1 
 
 Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid values from a normal distribution. Plot also $s^2$ and comment the difference.
 
-***Solution***
+#### Solution
 
 ```{r lab_01, code = readLines("src/lab_01.R"), echo=TRUE}
 ```
@@ -62,7 +63,7 @@ Check the biased nature of $s^2_b$ via MC simulation, generating $n=10$ iid valu
 Form the obtained plot, we can observe that the maximums of $s^2$ and $s^2_b$ don't coincide, even if $R$ tends to infinity. Due to the fact that $s^2$ is an unbiased estimator, we can conclude that $s^2_b$ is biased. 
 
 
-**Exercise 2**
+### Exercise 2 
 
 Let consider a darts target into $K=4$ zones. Hence we assign the following hitting probabilities:
 
@@ -83,39 +84,39 @@ $$
 We will try to simulate the data and perform a null-hypothesis-test, assuming that one of the $7$ players is a great player.
 
 
-***Solution***
+#### Solution
 ```{r lab_02, code = readLines("src/lab_02.R"), echo=TRUE}
 ```
 
-***Observations***
+#### Observations
 
 The low number of observations ($350$) makes the problem extremely dependent on the fixed seed: a modification of data changes significatively the computation of the $p-value$. However the conclusion does not vary.
 
-***Conclusion***
+#### Conclusion
 
 We can conclude that in the first case, when we consider the bad players only, we can accept the null hypothesis: $p-value$ is, approximatively, equal to $0.815$. When the good player joins the group we have to refuse the null hypothesis: the lower $p-value$, which is approximatively equal to $2.049\times 10^{-25}$, confirms it.
 
 
-**Exercise 3**
+### Exercise 3
 
 Consider now some of the most followed Instagram accounts in 2018: for each of the owners, we report also the number of Twitter followers (in milions). Are the Instagram and Twitter account somehow associated? Perform a correlation test, compute the p-value and give an answer. Here is the dataframe.
 
-***Solution***
+#### Solution
 
 ```{r lab_03, code = readLines("src/lab_03.R"), echo=TRUE}
 ```
 
-***Conclusion***
+#### Conclusion
 
 The Pearson correlation coefficient measures the linear relationship between Instagram's and Twitter's data. Knowing that correlations of -1 or +1 imply an exact linear relationship, we can conclude that the resulted value $cor = -0.4235845$ implies there is not a correlation between the two datasets. Moreover, a negative correlation implies that as x increases, y decreases, where $x$ is $Instagram$ and $y$ is $Twitter$. Furthermore, the plot shows the correlation coefficient and the significance level. 
 Lastly, the $\texttt{p-value}$ roughly indicates the probability of an uncorrelated system producing datasets that have a Pearson correlation at least as extreme as the one computed from these datasets. The p-values are not entirely reliable but are probably reasonable for datasets larger than $500$ or so.
 
 
-**Exercise 4**
+### Exercise 4 
 
 Compute analitically $J(\gamma, \gamma; y)$, $J(\gamma, \beta; y)$, $J(\beta, \beta; y)$.
 	
-***Solution***
+#### Solution
 
 Let $l(\gamma,\beta;y)$ the log-likelihood:	
 $$
@@ -152,22 +153,22 @@ $$
 	\frac{\partial^2 l(\gamma,\beta;y)}{\partial\beta^2}  =  \frac{n\gamma}{\beta^2}  -  \frac{\gamma(\gamma+1)}{\beta^{\gamma+2}} \sum_{i=1}^ny_i^\gamma.
 $$
 
-**Exercise 5**
+### Exercise 5
 
 Produce the contour plot for the quadratic approximation of the log-likelihood, based on the Taylor series:
 $$
 l(\theta)-l(\hat{\theta}) \approx -\frac{1}{2}(\theta-\hat{\theta})^T\,J(\hat{\theta})(\theta-\hat{\theta}).
 $$
 
-***Solution***
+#### Solution
 
 ```{r lab_05, code = readLines("src/lab_05.R"), echo=TRUE}
 ```
 
 
-# ***DAAG*** EXERCISES
+## DAAG EXERCISES {.tabset}
 
-**Exercise 11 - Cap 3**
+### Exercise 11 - Cap 3 
 
 The following data represent the total number of aberrant crypt foci (abnormal growths in the colon) observed in seven rats that had been administered a single dose of the carcinogen azoxymethane and sacrificed after six weeks (thanks to Ranjana Bird, Faculty of Human Ecology, University of Manitoba for the use of these data):
 
@@ -182,11 +183,12 @@ x <- rpois(7, 78.3) \\
 mean(x); var(x)
 ```
 
-***Solution***
+#### Solution
+
 ```{r DAAG_ex_11_cap_3, code = readLines("src/DAAG_ex_11_cap_3.R"), echo=TRUE}
 ```
 
-**Exercise 13 - Cap 3**
+### Exercise 13 - Cap 3 
 
 A Markov chain for the weather in a particular season of the year has the transition matrix, from one day to the next:
 
@@ -210,16 +212,16 @@ a) Simulate 1000 values, and calculate the proportion of times the chain visits 
 
 b) Here is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function rollmean() from the zoo package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
 
-***Solution***
+#### Solution
 
 ```{r daag_13_a, code = readLines("src/daag_13_a.R"), echo=TRUE}
 ```
 
-***Observations***
+#### Observations
 
 The proportion given by the simulation depends extremely from the seed: the number of calculated states ($n=1000$) is too small to observe a result which is independent from the seed and from the initial state, setted to $Sun$. A better result can be obtained enlarging $n$ and removing a proper amount of initial calculated states.
 
-***Conclusion***
+#### Conclusion
 
 Considering $n=1000$ states, the proportion given by the simulation is not like the theoretical result: even if there is a certain predominance of $Sun$ states, the proportion is not respected. The reason can be attributed to the low number of calculated states. 
 We can observe, in fact, that for $n=1000000$ the proportion coincides with the theoretical one.
@@ -228,14 +230,14 @@ We can observe, in fact, that for $n=1000000$ the proportion coincides with the 
 
 (b) Following, there is code that calculates rolling averages of the proportions over a number of simulations and plots the result. It uses the function $\texttt{rollmean()}$ from the $\texttt{zoo}$ package. Try varying the number of simulations and the width of the window. How wide a window is needed to get a good sense of the stationary distribution? This series settles down rather quickly to its stationary distribution (it “burns in” quite quickly). A reasonable width of window is, however, needed to give an accurate indication of the stationary distribution.
 
-***Solution***
+#### Solution
 
 In the following plots we can observe the variation of the mean, for each state, in according to the increasing of number of calculated states of the Markov Chian. We have varied the size of the window and the number of calculated states.
 
 ```{r daag_13_b, code = readLines("src/daag_13_b.R"), echo=TRUE}
 ```
 
-***Conclusion***
+#### Conclusion
 
 We can observe that, combining a big size of the window and a large amount of states, the plot shows what we expect: the proportion calculated in the previous exercise is respected,
 $$
@@ -244,7 +246,7 @@ $$
 \end{bmatrix}
 $$
 
-**Exercise 6 - Cap 4**
+### Exercise 6 - Cap 4 
 
 
 Here we generate random normal numbers with a sequential dependence structure:
@@ -258,7 +260,7 @@ acf(y)
 
 Repeat this several times. There should be no consistent pattern in the acf plot for different random samples y1. There will be a fairly consistent pattern in the acf plot for y, a result of the correlation that is introduced by adding to each value the next value in the sequence.
 
-***Solution***
+#### Solution
 
 ```{r DAAG_ex_6_cap_4, code = readLines("src/DAAG_ex_6_cap_4.R"), echo=TRUE}
 ```
@@ -266,18 +268,18 @@ Repeat this several times. There should be no consistent pattern in the acf plot
 In the top plot (series y1) there isn't a clear path on the same lag, neither on each lags. In the other hand, in the bottom plot, it seems to be a fairly consistent path among the three series: there are few lags in which the series have, more or less, the same correlation. 
 Moreover, it is clear that exist a kind of sinusoidal function among lags for the same collection (and it is showen for each collection) with 6/7 lags of period; in the end the three series seems to be out-of-phases among them.
 
-**Exercise 7 - Cap 4**
+### Exercise 7 - Cap 4 
 
 Create a function that does the calculations in the first two lines of the previous exercise. Put the calculation in a loop that repeats 25 times. Calculate the mean and variance for each vector y that is returned. Store the 25 means in the vector av, and store the 25 variances in the vector v. Calculate the variance of av.
 
-***Solution***
+#### Solution
 
 ```{r DAAG_ex_7_cap_4, code = readLines("src/DAAG_ex_7_cap_4.R"), echo=TRUE}
 ```
 
-# ***CS*** EXERCISES
+## CS EXERCISES {.tabset}
 
-**Exercise 3.3 - Cap 3**
+### Exercise 3.3 - Cap 3
 
 Rewrite the following, replacing the loop with efficient code:
 
@@ -294,12 +296,12 @@ for (i in 1:n) {
 
 Confirm that your rewrite is faster but gives the same result.
 
-***Solution***
+#### Solution
 
 ```{r CS_ex_3_3_cap3, code = readLines("src/CS_ex_3_3_cap_3.R"), echo=TRUE}
 ```
 
-**Exercise 3.5 - Cap 3**
+### Exercise 3.5 - Cap 3
 
 Consider solving the matrix equation $Ax = y$ for $x$ , where $y$ is a known $n$
 vector and $A$ is a known $n × n$ matrix. The formal solution to the problem is
@@ -308,11 +310,13 @@ forming $A^{−1}$ . This question explores this direct solution. Read the help 
 for solve before trying it.
 
 a) First create an $A$ , $x$ and $y$ satisfying $Ax = y$.
+
 ```{r}
 set.seed(0); n <- 1000
 A <- matrix(runif(n*n),n,n); x.true <- runif(n)
 y <- A%*%x.true
 ```
+
 The idea is to experiment with solving $Ax = y$ for $x$ , but with a known
 truth to compare the answer to.
 
@@ -326,7 +330,7 @@ long this takes and assess the mean absolute error of the result.
 
 d) What do you conclude?
 
-***Solution***
+#### Solution
 
 ```{r CS_ex_3_5_cap_3, code = readLines("src/CS_ex_3_5_cap_3.R"), echo=TRUE}
 ```
